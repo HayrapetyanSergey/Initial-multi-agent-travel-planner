@@ -1,0 +1,118 @@
+{
+    "timestamp": "2026-05-23_17-15-35",
+    "user_input": "Please suggest a cheaper 5-day travel itinerary to Armenia that focuses more on nature and includes fewer museums. The trip should still offer authentic local experiences, traditional cuisine, and visits to natural attractions like lakes or mountains, while minimizing costs to stay well under a $900 budget. Include practical travel tips and affordable accommodation options.",
+    "agent_prompts": {
+        "input_parser_prompt": "You are an AI Travel Input Parser.\n\nYour task is to extract structured travel information from the user's request.\n\nExtract:\n- destination\n- duration_days\n- budget\n- interests\n- travel_style\n\nBudget rule:\n- If the user gives a numeric budget, return it as a number.\n- If the user says cheap, budget-friendly, affordable, luxury, expensive, or similar words without a number, set budget to null.\n- Do not return words like \"cheap\" as budget.\n- Put those words under travel_style instead.\n\nReturn ONLY valid JSON.\n\nIf information is missing, set value to null.",
+        "researcher_prompt": "You are an AI Travel Research Agent.\n\nYour task is to generate structured travel research for any destination in the world.\n\nReturn ONLY valid JSON with this exact structure:\n\n{\n  \"status\": \"success\",\n  \"source\": \"ai_generated_research\",\n  \"destination\": \"...\",\n  \"currency\": \"USD estimates\",\n  \"daily_cost_estimates\": {\n    \"hotel\": 0,\n    \"food\": 0,\n    \"transport\": 0\n  },\n  \"matched_places\": [\n    {\n      \"city\": \"...\",\n      \"name\": \"...\",\n      \"category\": \"...\",\n      \"estimated_cost\": 0,\n      \"description\": \"...\"\n    }\n  ],\n  \"travel_tips\": [\n    \"...\",\n    \"...\",\n    \"...\"\n  ]\n}\n\nRules:\n- Use the user's destination, duration, budget, travel style, and interests.\n- Suggest realistic and popular places.\n- Include at least 4 matched places.\n- Keep all prices approximate in USD.\n- All cost fields must be numbers, not text.\n- Do not include markdown.\n- Do not include explanations outside JSON.\n- Do not include itinerary text.\n- Do not include headings.",
+        "itinerary_prompt": "You are an AI Itinerary Planning Agent.\n\nYour task is to create a realistic day-by-day travel itinerary.\n\nRules:\n- Use only the places and information provided in the research data.\n- Match the user's interests.\n- Do not overload the days.\n- Group nearby or same-city activities together.\n- Include morning, afternoon, and evening for each day.\n- Do not create a full budget breakdown.\n- If there is not enough research data, say what is missing.\n- Return a clear structured itinerary.",
+        "budget_prompt": "You are an AI Budget Estimation Agent.\n\nYour task is to estimate travel costs using available travel data.\n\nEstimate:\n- hotel costs\n- food costs\n- transportation costs\n- activity costs\n- total estimated cost\n\nDetermine whether the plan fits the user's budget.",
+        "critic_prompt": "You are a strict AI Travel Plan Critic Agent.\n\nYour task is to evaluate the travel plan created by other agents.\n\nEvaluate:\n- completeness\n- practicality\n- budget_fit\n- faithfulness\n\nGive scores from 1 to 5.\n\nAlso provide:\n- main strengths\n- weak points\n- improvement suggestions\n- final recommendation\n\nReturn ONLY valid JSON.",
+        "final_response_prompt": "You are an AI Final Response Generator.\n\nYour task is to combine all agent outputs into one clean, professional, structured travel recommendation.\n\nStructure:\n1. Trip Overview\n2. Destination Summary\n3. Day-by-Day Itinerary\n4. Budget Summary\n5. Travel Tips\n6. Critic Evaluation Summary\n7. Final Recommendation\n\nKeep the answer organized and easy to read."
+    },
+    "agent_outputs": {
+        "input_parser_agent": {
+            "destination": "Armenia",
+            "duration_days": 5,
+            "budget": 900,
+            "interests": [
+                "nature",
+                "authentic local experiences",
+                "traditional cuisine",
+                "natural attractions",
+                "lakes",
+                "mountains"
+            ],
+            "travel_style": [
+                "cheaper",
+                "budget-friendly",
+                "affordable"
+            ]
+        },
+        "research_agent": {
+            "status": "success",
+            "source": "ai_generated_research",
+            "destination": "Armenia",
+            "currency": "USD estimates",
+            "daily_cost_estimates": {
+                "hotel": 20,
+                "food": 10,
+                "transport": 7
+            },
+            "matched_places": [
+                {
+                    "city": "Dilijan",
+                    "name": "Dilijan National Park",
+                    "category": "Nature",
+                    "estimated_cost": 0,
+                    "description": "A lush forested area known as the 'Switzerland of Armenia', ideal for hiking, bird watching, and enjoying the pristine natural environment."
+                },
+                {
+                    "city": "Lake Sevan",
+                    "name": "Sevanavank Monastery",
+                    "category": "Natural & Historic Attraction",
+                    "estimated_cost": 2,
+                    "description": "Located on the shores of Lake Sevan, this 9th-century monastery offers stunning views of the large alpine lake surrounded by mountains."
+                },
+                {
+                    "city": "Yerevan",
+                    "name": "Vernissage Market",
+                    "category": "Authentic Local Experience",
+                    "estimated_cost": 0,
+                    "description": "An open-air market in Yerevan offering traditional Armenian crafts, souvenirs, and a chance to experience local culture."
+                },
+                {
+                    "city": "Tatev",
+                    "name": "Tatev Monastery and Wings of Tatev",
+                    "category": "Natural & Historic Attraction",
+                    "estimated_cost": 15,
+                    "description": "A 9th-century monastery accessible via the Wings of Tatev, the world's longest reversible aerial tramway, offering breathtaking views of the Vorotan gorge."
+                }
+            ],
+            "travel_tips": [
+                "Utilize marshrutkas (shared minibuses) and local buses for affordable transportation between cities and landmarks.",
+                "Try traditional Armenian dishes such as khorovats (barbecue), dolma, and lavash bread at local eateries for authentic and budget-friendly meals.",
+                "Stay in guesthouses or hostels in smaller towns like Dilijan to experience local hospitality and save on accommodation costs."
+            ]
+        },
+        "itinerary_agent": "Armenia 5-Day Budget-Friendly Itinerary: Nature, Local Experiences & Traditional Cuisine\n\nDay 1: Arrival and Yerevan Exploration\n- Morning: Arrive in Yerevan and check into a budget-friendly guesthouse or hostel.\n- Afternoon: Visit Vernissage Market to explore traditional Armenian crafts and souvenirs, soak in local culture (free entry).\n- Evening: Dine at a local eatery in Yerevan, trying traditional dishes such as khorovats (barbecue), dolma, and lavash bread.\n\nDay 2: Dilijan National Park – The Switzerland of Armenia\n- Morning: Take a marshrutka or local bus to Dilijan.\n- Afternoon: Hike and explore Dilijan National Park, enjoying bird watching and pristine nature (free entry).\n- Evening: Stay overnight in a guesthouse in Dilijan to experience authentic local hospitality. Try home-cooked Armenian cuisine at the guesthouse or nearby budget-friendly restaurants.\n\nDay 3: Tatev Monastery and Wings of Tatev Adventure\n- Morning: Travel by local bus to Tatev village.\n- Afternoon: Experience the Wings of Tatev tramway (approx. $15) to reach Tatev Monastery. Enjoy breathtaking views of the Vorotan gorge and explore the historic 9th-century monastery.\n- Evening: Return to Tatev village or nearby accommodations for an affordable dinner featuring traditional cuisine.\n\nDay 4: Lake Sevan and Sevanavank Monastery\n- Morning: Head to Lake Sevan by marshrutka.\n- Afternoon: Visit Sevanavank Monastery ($2 entrance) on the lake’s shores. Take in stunning alpine lake views surrounded by mountains.\n- Evening: Enjoy fresh fish or local dishes at one of the lakeside budget-friendly eateries. Stay overnight near Lake Sevan or return to Yerevan for more lodging options.\n\nDay 5: Leisure & Departure from Yerevan\n- Morning: Optional revisit to Vernissage Market or explore local cafes in Yerevan.\n- Afternoon: Relax in city parks or visit a local bakery for some last tastes of Armenian lavash and pastries.\n- Evening: Depart from Yerevan.\n\nBudget Tips:\n- Accommodation: $20/day in guesthouses or hostels.\n- Food: $10/day eating at local eateries or guesthouses.\n- Transport: $7/day using marshrutkas and local buses.\n- Entrance fees: Tatev tram $15, Sevanavank $2; others free.\n\nThis itinerary balances nature, authentic experiences, and traditional cuisine while keeping within a budget of approximately $57/day plus minor extra expenses. It groups activities geographically to minimize travel time and costs. Enjoy Armenia's beautiful mountains, lakes, historic sites, and warm local culture!",
+        "budget_agent": {
+            "duration_days": 5,
+            "user_budget": 900.0,
+            "estimated_costs": {
+                "hotel_total": 100,
+                "food_total": 50,
+                "transport_total": 35,
+                "activities_total": 17,
+                "total_estimated_cost": 202
+            },
+            "remaining_budget": 698.0,
+            "budget_status": "Within budget",
+            "note": "Costs are approximate and based on the local knowledge base, not live prices."
+        },
+        "critic_agent": {
+            "completeness": 5,
+            "practicality": 5,
+            "budget_fit": 5,
+            "faithfulness": 5,
+            "main_strengths": [
+                "The itinerary covers all user interests including nature, authentic local experiences, traditional cuisine, lakes, and mountains.",
+                "Detailed daily plans with geographic grouping minimize travel time and expense.",
+                "Budget is clearly calculated and well within the user's specified budget with realistic cost estimates.",
+                "Use of local transportation and guesthouses aligns well with the user's preference for budget-friendly travel.",
+                "Inclusion of specific local dishes and cultural experiences enhances authenticity."
+            ],
+            "weak_points": [
+                "Day 3's return to accommodation after Tatev might be unclear; specifying whether to stay in Tatev or return to another town could improve clarity.",
+                "No explicit mention of contingency plans or flexibility for unexpected changes."
+            ],
+            "improvement_suggestions": [
+                "Clarify accommodation arrangements for Day 3 evening to avoid confusion about staying location.",
+                "Add optional alternative activities or downtime suggestions in case of weather or travel delays.",
+                "Include a brief note on safety or language tips for budget travelers to enhance practicality."
+            ],
+            "final_recommendation": "Highly recommended. The travel plan is well thought-out, detailed, budget-conscious, and faithfully matches user interests and constraints."
+        },
+        "final_response_agent": "**1. Trip Overview**  \nThis 5-day budget-friendly itinerary through Armenia is thoughtfully designed for travelers seeking an immersive nature experience with authentic local culture and traditional cuisine. Focusing on Armenia’s spectacular natural attractions—mountains, alpine lakes, and verdant forests—while minimizing museum visits and expenses, this plan keeps costs well below a $900 budget. You’ll enjoy scenic hikes, cultural markets, traditional meals, and historic sites with minimal entrance fees, complemented by affordable stays and local transport options.\n\n**2. Destination Summary**  \nArmenia offers a rich blend of breathtaking nature and warm, welcoming communities. Known for its dramatic mountain landscapes and pristine lakes, the country provides ample opportunities for hiking, bird watching, and exploring ancient monasteries set in stunning environments. The itinerary highlights the “Switzerland of Armenia” — Dilijan National Park; the vast mountain-fringed Lake Sevan with the lakeside Sevanavank Monastery; and the spectacular Wings of Tatev cable tramway leading to Tatev Monastery overlooking the Vorotan Gorge. Yerevan’s Vernissage Market provides an authentic cultural experience steeped in Armenian crafts.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival and Yerevan Exploration**  \n  - Morning: Arrive in Yerevan; check into a budget guesthouse or hostel.  \n  - Afternoon: Explore Vernissage Market (free), encountering traditional Armenian crafts and lively local culture.  \n  - Evening: Dine on classic dishes such as khorovats (barbecue), dolma, and freshly baked lavash bread at local eateries.\n\n- **Day 2: Nature Immersion in Dilijan National Park**  \n  - Morning: Take a marshrutka (shared minibus) or local bus to Dilijan (~2 hours).  \n  - Afternoon: Hike and birdwatch through Dilijan National Park’s lush forests—often called “Switzerland of Armenia” (free entry).  \n  - Evening: Stay overnight in a local guesthouse, enjoying authentic home-cooked Armenian cuisine and hospitality.\n\n- **Day 3: Tatev Monastery and Wings of Tatev Experience**  \n  - Morning: Travel by local bus to Tatev village (~3-4 hours).  \n  - Afternoon: Ride the Wings of Tatev aerial tramway ($15) to the 9th-century Tatev Monastery. Take in breathtaking views of Vorotan Gorge.  \n  - Evening: Stay overnight in Tatev or nearby guesthouses; have a budget-friendly dinner featuring traditional fare.\n\n- **Day 4: Lake Sevan and Sevanavank Monastery**  \n  - Morning: Journey to Lake Sevan by marshrutka (~2 hours).  \n  - Afternoon: Visit the historic Sevanavank Monastery ($2 entrance) perched on lake shores; enjoy mountain and lake vistas.  \n  - Evening: Sample fresh fish or local dishes at lakeside budget restaurants. Optionally stay near Lake Sevan or return to Yerevan for wider accommodation choices.\n\n- **Day 5: Leisure in Yerevan & Departure**  \n  - Morning: Optionally revisit Vernissage Market or unwind in Yerevan’s parks and cafés.  \n  - Afternoon: Taste Armenian pastries and lavash at local bakeries.  \n  - Evening: Depart from Yerevan.\n\n**4. Budget Summary**  \n| Expense Category   | Estimated Total (USD) | Notes                                   |  \n|--------------------|-----------------------|-----------------------------------------|  \n| Accommodation      | $100 (approx. $20/day)| Guesthouses or hostels in Dilijan, Tatev, Yerevan, Lake Sevan vicinity |  \n| Food               | $50 (approx. $10/day) | Traditional local eateries and home cooking |  \n| Transportation     | $35 (approx. $7/day)  | Marshrutkas, buses, local transport between destinations |  \n| Activities & Fees  | $17                   | Wings of Tatev tram ($15), Sevanavank ($2), other nature sites free |  \n| **Total Estimated**| **~$202**             | Well within the $900 budget; leaves $698 buffer for extras or emergencies |\n\n**5. Travel Tips**  \n- Use marshrutkas and local buses to travel affordably between cities and attractions. This is the most economical way to get around.  \n- Stay in guesthouses or family-run hostels, especially in smaller towns like Dilijan and Tatev, for authentic experiences and hospitality.  \n- Try local dishes such as khorovats (Armenian barbecue), dolma, and lavash bread at small eateries or your guesthouse—both affordable and cultural.  \n- Carry some cash for entrance fees and markets; credit cards may not always be accepted in rural areas.  \n- Learn basic Armenian or Russian phrases to enhance communication, or use a translation app. Locals appreciate any effort to engage.  \n- Weather in mountainous areas can be variable; pack layers, sturdy footwear, and rain protection.  \n- Allow some flexibility in the schedule to accommodate weather or transport delays.  \n- For safety, Armenia is generally safe for travelers, but standard precautions apply—keep valuables secure and stay aware of your surroundings.\n\n**6. Critic Evaluation Summary**  \nThis itinerary fully satisfies the user’s request by centering on natural wonders and authentic cultural experiences while remaining highly budget-conscious. It offers a practical geographic grouping of activities that reduces travel times and costs. The inclusion of specific local dishes and visiting lively markets enriches authenticity. Critiques suggest clarifying Day 3 accommodation plans around Tatev and adding suggestions for alternative activities or flexibility for unforeseen circumstances. A brief safety and language advice addition would also improve traveler preparedness. Overall, this plan is comprehensive, feasible, and cost-effective, well suited for nature lovers on a budget.\n\n**7. Final Recommendation**  \nHighly recommended."
+    },
+    "final_answer": "**1. Trip Overview**  \nThis 5-day budget-friendly itinerary through Armenia is thoughtfully designed for travelers seeking an immersive nature experience with authentic local culture and traditional cuisine. Focusing on Armenia’s spectacular natural attractions—mountains, alpine lakes, and verdant forests—while minimizing museum visits and expenses, this plan keeps costs well below a $900 budget. You’ll enjoy scenic hikes, cultural markets, traditional meals, and historic sites with minimal entrance fees, complemented by affordable stays and local transport options.\n\n**2. Destination Summary**  \nArmenia offers a rich blend of breathtaking nature and warm, welcoming communities. Known for its dramatic mountain landscapes and pristine lakes, the country provides ample opportunities for hiking, bird watching, and exploring ancient monasteries set in stunning environments. The itinerary highlights the “Switzerland of Armenia” — Dilijan National Park; the vast mountain-fringed Lake Sevan with the lakeside Sevanavank Monastery; and the spectacular Wings of Tatev cable tramway leading to Tatev Monastery overlooking the Vorotan Gorge. Yerevan’s Vernissage Market provides an authentic cultural experience steeped in Armenian crafts.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival and Yerevan Exploration**  \n  - Morning: Arrive in Yerevan; check into a budget guesthouse or hostel.  \n  - Afternoon: Explore Vernissage Market (free), encountering traditional Armenian crafts and lively local culture.  \n  - Evening: Dine on classic dishes such as khorovats (barbecue), dolma, and freshly baked lavash bread at local eateries.\n\n- **Day 2: Nature Immersion in Dilijan National Park**  \n  - Morning: Take a marshrutka (shared minibus) or local bus to Dilijan (~2 hours).  \n  - Afternoon: Hike and birdwatch through Dilijan National Park’s lush forests—often called “Switzerland of Armenia” (free entry).  \n  - Evening: Stay overnight in a local guesthouse, enjoying authentic home-cooked Armenian cuisine and hospitality.\n\n- **Day 3: Tatev Monastery and Wings of Tatev Experience**  \n  - Morning: Travel by local bus to Tatev village (~3-4 hours).  \n  - Afternoon: Ride the Wings of Tatev aerial tramway ($15) to the 9th-century Tatev Monastery. Take in breathtaking views of Vorotan Gorge.  \n  - Evening: Stay overnight in Tatev or nearby guesthouses; have a budget-friendly dinner featuring traditional fare.\n\n- **Day 4: Lake Sevan and Sevanavank Monastery**  \n  - Morning: Journey to Lake Sevan by marshrutka (~2 hours).  \n  - Afternoon: Visit the historic Sevanavank Monastery ($2 entrance) perched on lake shores; enjoy mountain and lake vistas.  \n  - Evening: Sample fresh fish or local dishes at lakeside budget restaurants. Optionally stay near Lake Sevan or return to Yerevan for wider accommodation choices.\n\n- **Day 5: Leisure in Yerevan & Departure**  \n  - Morning: Optionally revisit Vernissage Market or unwind in Yerevan’s parks and cafés.  \n  - Afternoon: Taste Armenian pastries and lavash at local bakeries.  \n  - Evening: Depart from Yerevan.\n\n**4. Budget Summary**  \n| Expense Category   | Estimated Total (USD) | Notes                                   |  \n|--------------------|-----------------------|-----------------------------------------|  \n| Accommodation      | $100 (approx. $20/day)| Guesthouses or hostels in Dilijan, Tatev, Yerevan, Lake Sevan vicinity |  \n| Food               | $50 (approx. $10/day) | Traditional local eateries and home cooking |  \n| Transportation     | $35 (approx. $7/day)  | Marshrutkas, buses, local transport between destinations |  \n| Activities & Fees  | $17                   | Wings of Tatev tram ($15), Sevanavank ($2), other nature sites free |  \n| **Total Estimated**| **~$202**             | Well within the $900 budget; leaves $698 buffer for extras or emergencies |\n\n**5. Travel Tips**  \n- Use marshrutkas and local buses to travel affordably between cities and attractions. This is the most economical way to get around.  \n- Stay in guesthouses or family-run hostels, especially in smaller towns like Dilijan and Tatev, for authentic experiences and hospitality.  \n- Try local dishes such as khorovats (Armenian barbecue), dolma, and lavash bread at small eateries or your guesthouse—both affordable and cultural.  \n- Carry some cash for entrance fees and markets; credit cards may not always be accepted in rural areas.  \n- Learn basic Armenian or Russian phrases to enhance communication, or use a translation app. Locals appreciate any effort to engage.  \n- Weather in mountainous areas can be variable; pack layers, sturdy footwear, and rain protection.  \n- Allow some flexibility in the schedule to accommodate weather or transport delays.  \n- For safety, Armenia is generally safe for travelers, but standard precautions apply—keep valuables secure and stay aware of your surroundings.\n\n**6. Critic Evaluation Summary**  \nThis itinerary fully satisfies the user’s request by centering on natural wonders and authentic cultural experiences while remaining highly budget-conscious. It offers a practical geographic grouping of activities that reduces travel times and costs. The inclusion of specific local dishes and visiting lively markets enriches authenticity. Critiques suggest clarifying Day 3 accommodation plans around Tatev and adding suggestions for alternative activities or flexibility for unforeseen circumstances. A brief safety and language advice addition would also improve traveler preparedness. Overall, this plan is comprehensive, feasible, and cost-effective, well suited for nature lovers on a budget.\n\n**7. Final Recommendation**  \nHighly recommended."
+}

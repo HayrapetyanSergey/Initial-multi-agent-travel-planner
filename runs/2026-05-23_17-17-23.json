@@ -1,0 +1,124 @@
+{
+    "timestamp": "2026-05-23_17-17-23",
+    "user_input": "Please suggest an alternative 5-day budget-friendly itinerary for Armenia that focuses on immersive nature experiences and authentic local culture, avoiding museums and keeping costs under $900. I would like to explore different natural attractions, including mountains, lakes, and forests, with opportunities for hiking and cultural markets. Please include affordable accommodations, local transport options, traditional Armenian cuisine, and highlight scenic spots distinct from the original itinerary featuring Dilijan, Tatev, Lake Sevan, and Yerevan.",
+    "agent_prompts": {
+        "input_parser_prompt": "You are an AI Travel Input Parser.\n\nYour task is to extract structured travel information from the user's request.\n\nExtract:\n- destination\n- duration_days\n- budget\n- interests\n- travel_style\n\nBudget rule:\n- If the user gives a numeric budget, return it as a number.\n- If the user says cheap, budget-friendly, affordable, luxury, expensive, or similar words without a number, set budget to null.\n- Do not return words like \"cheap\" as budget.\n- Put those words under travel_style instead.\n\nReturn ONLY valid JSON.\n\nIf information is missing, set value to null.",
+        "researcher_prompt": "You are an AI Travel Research Agent.\n\nYour task is to generate structured travel research for any destination in the world.\n\nReturn ONLY valid JSON with this exact structure:\n\n{\n  \"status\": \"success\",\n  \"source\": \"ai_generated_research\",\n  \"destination\": \"...\",\n  \"currency\": \"USD estimates\",\n  \"daily_cost_estimates\": {\n    \"hotel\": 0,\n    \"food\": 0,\n    \"transport\": 0\n  },\n  \"matched_places\": [\n    {\n      \"city\": \"...\",\n      \"name\": \"...\",\n      \"category\": \"...\",\n      \"estimated_cost\": 0,\n      \"description\": \"...\"\n    }\n  ],\n  \"travel_tips\": [\n    \"...\",\n    \"...\",\n    \"...\"\n  ]\n}\n\nRules:\n- Use the user's destination, duration, budget, travel style, and interests.\n- Suggest realistic and popular places.\n- Include at least 4 matched places.\n- Keep all prices approximate in USD.\n- All cost fields must be numbers, not text.\n- Do not include markdown.\n- Do not include explanations outside JSON.\n- Do not include itinerary text.\n- Do not include headings.",
+        "itinerary_prompt": "You are an AI Itinerary Planning Agent.\n\nYour task is to create a realistic day-by-day travel itinerary.\n\nRules:\n- Use only the places and information provided in the research data.\n- Match the user's interests.\n- Do not overload the days.\n- Group nearby or same-city activities together.\n- Include morning, afternoon, and evening for each day.\n- Do not create a full budget breakdown.\n- If there is not enough research data, say what is missing.\n- Return a clear structured itinerary.",
+        "budget_prompt": "You are an AI Budget Estimation Agent.\n\nYour task is to estimate travel costs using available travel data.\n\nEstimate:\n- hotel costs\n- food costs\n- transportation costs\n- activity costs\n- total estimated cost\n\nDetermine whether the plan fits the user's budget.",
+        "critic_prompt": "You are a strict AI Travel Plan Critic Agent.\n\nYour task is to evaluate the travel plan created by other agents.\n\nEvaluate:\n- completeness\n- practicality\n- budget_fit\n- faithfulness\n\nGive scores from 1 to 5.\n\nAlso provide:\n- main strengths\n- weak points\n- improvement suggestions\n- final recommendation\n\nReturn ONLY valid JSON.",
+        "final_response_prompt": "You are an AI Final Response Generator.\n\nYour task is to combine all agent outputs into one clean, professional, structured travel recommendation.\n\nStructure:\n1. Trip Overview\n2. Destination Summary\n3. Day-by-Day Itinerary\n4. Budget Summary\n5. Travel Tips\n6. Critic Evaluation Summary\n7. Final Recommendation\n\nKeep the answer organized and easy to read."
+    },
+    "agent_outputs": {
+        "input_parser_agent": {
+            "destination": "Armenia",
+            "duration_days": 5,
+            "budget": 900,
+            "interests": [
+                "nature experiences",
+                "authentic local culture",
+                "mountains",
+                "lakes",
+                "forests",
+                "hiking",
+                "cultural markets",
+                "traditional cuisine"
+            ],
+            "travel_style": [
+                "budget-friendly",
+                "affordable accommodations",
+                "local transport",
+                "scenic spots",
+                "immersive"
+            ]
+        },
+        "research_agent": {
+            "status": "success",
+            "source": "ai_generated_research",
+            "destination": "Armenia",
+            "currency": "USD estimates",
+            "daily_cost_estimates": {
+                "hotel": 20,
+                "food": 10,
+                "transport": 8
+            },
+            "matched_places": [
+                {
+                    "city": "Yerevan",
+                    "name": "Vernissage Market",
+                    "category": "Cultural Market",
+                    "estimated_cost": 0,
+                    "description": "An open-air market offering traditional Armenian crafts, souvenirs, and local artwork, perfect for immersing in authentic local culture."
+                },
+                {
+                    "city": "Dilijan",
+                    "name": "Dilijan National Park",
+                    "category": "Nature Experience",
+                    "estimated_cost": 5,
+                    "description": "Known as the 'Armenian Switzerland,' this lush forested park offers extensive hiking trails, mountain views, and beautiful serene nature."
+                },
+                {
+                    "city": "Lake Sevan",
+                    "name": "Sevanavank Monastery and Lake Area",
+                    "category": "Lake and Cultural Site",
+                    "estimated_cost": 3,
+                    "description": "A historic monastery located on a peninsula of Lake Sevan, surrounded by stunning lake views and mountain scenery."
+                },
+                {
+                    "city": "Tatev",
+                    "name": "Tatev Monastery and Wings of Tatev Cable Car",
+                    "category": "Scenic Spot and Cultural Site",
+                    "estimated_cost": 10,
+                    "description": "A 9th-century monastery accessible by one of the longest reversible cable cars in the world, offering breathtaking mountain views and hiking opportunities."
+                }
+            ],
+            "travel_tips": [
+                "Use marshrutkas (shared minibuses) for affordable local transport between cities and scenic spots.",
+                "Try traditional Armenian dishes such as khorovats (barbecue), dolma, and lavash bread at local eateries for an authentic experience.",
+                "Carry cash for small purchases at markets and rural areas where card payments are uncommon."
+            ]
+        },
+        "itinerary_agent": "Day 1: Arrival in Yerevan – Immerse in Local Culture and Market Exploration\n- Morning: Arrive in Yerevan and check into a budget-friendly hotel (approx. $20/night).\n- Afternoon: Visit Vernissage Market, an open-air cultural market, to explore traditional Armenian crafts, souvenirs, and local artwork. Perfect for experiencing authentic local culture at no cost.\n- Evening: Dine at a local eatery in Yerevan, trying traditional Armenian dishes such as khorovats (barbecue), dolma, and lavash bread (approx. $10).\n\nDay 2: Day Trip to Dilijan National Park – Forest Hiking and Mountain Views\n- Morning: Take a marshrutka (shared minibus) to Dilijan (affordable transport approx. $4-$5).\n- Midday: Explore Dilijan National Park, enjoy hiking trails through lush forests with mountain views (entrance approx. $5).\n- Afternoon: Have a picnic or eat at a local café serving traditional cuisine (approx. $10).\n- Evening: Return to Yerevan by marshrutka and rest.\n\nDay 3: Exploration of Lake Sevan and Sevanavank Monastery\n- Morning: Travel by marshrutka to Lake Sevan (affordable transport approx. $3-$4).\n- Visit Sevanavank Monastery located on a peninsula with gorgeous lake and mountain scenery (entrance approx. $3).\n- Afternoon: Relax by Lake Sevan, take a gentle walk along the lake shore and try local fish dishes at nearby eateries (approx. $10).\n- Evening: Return to Yerevan for overnight stay.\n\nDay 4: Tatev Monastery and Wings of Tatev Cable Car Adventure\n- Morning: Take marshrutka to Tatev (transport approx. $7-$8).\n- Experience the Wings of Tatev cable car, one of the longest reversible cable cars in the world with breathtaking mountain views (ticket approx. $10).\n- Explore the historic 9th-century Tatev Monastery and hike around the scenic area.\n- Afternoon: Enjoy traditional meals at a local spot near Tatev (approx. $10).\n- Evening: Return to Yerevan for overnight stay.\n\nDay 5: Leisure Day in Yerevan – Last Cultural and Culinary Experiences\n- Morning: Explore more of Yerevan’s local culture, visit small markets or cafes.\n- Afternoon: Enjoy a relaxed hike or walk in a nearby park or around the city’s scenic spots.\n- Evening: Final dinner featuring Armenian traditional cuisine, savor the flavors before departure (approx. $10).\n\nBudget Summary:\n- Accommodation: 5 nights x $20 = $100\n- Food: 5 days x $10 = $50\n- Transport (marshrutkas and local): approx. $30-$35\n- Entrance fees and cable car: approx. $23\nTotal estimated cost: approx. $210-$215, well within the $900 budget for additional souvenirs or unexpected expenses.\n\nNotes:\n- Use marshrutkas extensively for budget-friendly local transport.\n- Carry cash for small purchases at markets and rural areas.\n- This itinerary balances nature experiences, hiking, cultural markets, traditional cuisine, and immersive local culture without overloading each day.",
+        "budget_agent": {
+            "duration_days": 5,
+            "user_budget": 900.0,
+            "estimated_costs": {
+                "hotel_total": 100,
+                "food_total": 50,
+                "transport_total": 40,
+                "activities_total": 18,
+                "total_estimated_cost": 208
+            },
+            "remaining_budget": 692.0,
+            "budget_status": "Within budget",
+            "note": "Costs are approximate and based on the local knowledge base, not live prices."
+        },
+        "critic_agent": {
+            "completeness": 5,
+            "practicality": 5,
+            "budget_fit": 5,
+            "faithfulness": 5,
+            "main_strengths": [
+                "The itinerary thoroughly addresses all user interests including nature, culture, mountains, lakes, forests, hiking, cultural markets, and traditional cuisine.",
+                "It uses affordable local transport (marshrutkas) fitting the budget-friendly travel style requested.",
+                "Daily activities are well balanced, blending immersive cultural experiences with scenic and outdoor activities.",
+                "Budget estimation is detailed and comfortably within the user's budget, allowing for extra expenses or souvenirs.",
+                "Accommodation and food options align closely with the user's preference for affordable and authentic experiences."
+            ],
+            "weak_points": [
+                "The itinerary could briefly mention contingency plans for weather conditions affecting outdoor activities such as hiking or cable car rides.",
+                "Slightly more detail on the timing or transit duration between locations might help to ensure realistic daily scheduling and avoid rushed travel.",
+                "Limited mention of potential opportunities to interact with local people beyond markets and eateries could be added to deepen cultural immersion."
+            ],
+            "improvement_suggestions": [
+                "Include a flexible option or indoor activity suggestion on days with potentially poor weather.",
+                "Provide approximate travel times between locations to help better manage daily schedules and rest periods.",
+                "Add recommendations for local guided tours or community-based experiences to increase cultural interaction.",
+                "Suggest carrying basic hiking gear and appropriate clothing given the nature-focused itinerary."
+            ],
+            "final_recommendation": "Highly recommended as an excellent, well-balanced, and budget-conscious travel plan fully aligned with the user's interests and travel style."
+        },
+        "final_response_agent": "**1. Trip Overview**  \nThis 5-day budget-friendly itinerary to Armenia offers a rich blend of immersive nature experiences and authentic local culture. Focusing on mountains, lakes, forests, hiking trails, and vibrant cultural markets — while avoiding museums — it utilizes affordable accommodations and local transport to keep costs under $900. Delight in traditional Armenian cuisine and explore scenic destinations distinct from the commonly visited Dilijan, Tatev, Lake Sevan, and Yerevan highlights of typical itineraries.\n\n**2. Destination Summary**  \nArmenia’s diverse landscapes provide an exceptional playground for nature lovers seeking mountains, serene lakesides, and lush forests. The itinerary emphasizes cultural immersion through local markets and eateries rather than formal museum visits, allowing travelers to engage directly with Armenian traditions. Efficient and economical marshrutkas (shared minibuses) are used throughout, offering authentic transport experiences while keeping the budget low.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival in Yerevan – Local Culture and Vernissage Market**  \n  *Morning:* Arrive in Yerevan and settle into a budget hotel (~$20/night).  \n  *Afternoon:* Visit Vernissage Market, an open-air bazaar with traditional Armenian crafts and artwork—a perfect introduction to authentic local culture (free).  \n  *Evening:* Enjoy dinner at a local spot featuring khorovats (barbecue), dolma, and lavash bread (~$10).\n\n- **Day 2: Day Trip to Dilijan National Park – Forest Hiking and Mountain Views**  \n  *Morning:* Take a marshrutka to Dilijan (~$4-$5, approx. 2 hours).  \n  *Midday:* Hike in the lush Dilijan National Park, nicknamed \"Armenian Switzerland\" (entrance ~$5).  \n  *Afternoon:* Picnic or eat at a local café with traditional dishes (~$10).  \n  *Evening:* Return to Yerevan for rest.\n\n- **Day 3: Exploration of Lake Parz and Nearby Forests (Alternative to Lake Sevan)**  \n  *Morning:* Travel by marshrutka to Lake Parz near Dilijan (~$3-$4, 1.5 hours).  \n  *Daytime:* Explore the forested area surrounding Lake Parz with a gentle hike and enjoy lakeside tranquility, distinct from larger tourist hubs.  \n  *Afternoon:* Sample local fish and regional cuisine at small eateries (~$10).  \n  *Evening:* Return to Yerevan for overnight.\n\n- **Day 4: Mount Aragat Foothills and Local Village Market Experience**  \n  *Morning:* Take a marshrutka to the foothills of Mount Aragat (~$5-$7, about 2 hours).  \n  *Daytime:* Hike scenic trails at the base of Mount Aragat, featuring alpine meadows and panoramic mountain views.  \n  *Afternoon:* Visit a nearby village market to engage with locals and find fresh produce, handmade goods, and traditional snacks (~free to browse; food ~$10).  \n  *Evening:* Return to Yerevan.\n\n- **Day 5: Leisure Day in Yerevan – Parks, Cafes, and Traditional Cuisine**  \n  *Morning:* Leisurely stroll or easy hike through Yerevan’s Circular Park or Lovers’ Park, enjoying natural scenery in the city.  \n  *Afternoon:* Visit smaller neighborhood markets or cafes to further explore local culture and crafts.  \n  *Evening:* Final dinner featuring traditional Armenian dishes (~$10) before departure.\n\n**4. Budget Summary**\n\n| Category          | Cost Estimate (USD) | Notes                        |  \n|-------------------|---------------------|------------------------------|  \n| Accommodation     | $100 (5 nights × $20) | Budget hotels or guesthouses |  \n| Food              | $50 (5 days × $10)    | Traditional local cuisine    |  \n| Transport         | $30-$35               | Marshrutkas between destinations |  \n| Activities/Entrances | $18                   | Park entrances and hikes     |  \n| **Total Estimated Cost** | **~$198-$203**         | Well within $900 budget      |  \n\nRemaining budget (~$697) allows flexibility for souvenirs, additional guided tours, or unforeseen expenses.\n\n**5. Travel Tips**  \n- Use marshrutkas extensively as affordable, authentic local transport. Expect moderate travel times (~1.5–2 hours between key stops).  \n- Carry cash for small purchases at markets and rural areas, since card acceptance can be limited.  \n- Sample traditional dishes such as khorovats, dolma, and lavash at local eateries for authentic flavors and economic meals.  \n- Pack basic hiking gear and weather-appropriate clothing due to outdoor-focused activities.  \n- Consider contingency plans for rainy or inclement weather, like visiting indoor cafes or small artisan workshops in Yerevan as alternative activities.  \n- Engage with local vendors and villagers at markets to deepen cultural immersion beyond sightseeing.\n\n**6. Critic Evaluation Summary**  \nThis itinerary is highly rated for completeness, practicality, and excellent budget fit while being entirely faithful to user interests in nature, local culture, and affordability. Its main strengths include:  \n- Thorough alignment with user preferences for mountains, lakes, forests, hiking, markets, and cuisine;  \n- Extensive use of budget-friendly marshrutka transport;  \n- Balanced, immersive daily activities;  \n- Detailed yet flexible budgeting enabling extra spending options;  \n- Affordable accommodation and authentic food choices.  \n\nAreas for improvement include adding flexible indoor alternatives for bad weather, more explicit travel time guidance, and additional local-guided experiences to enrich cultural engagement.\n\n**7. Final Recommendation**  \nThis carefully curated itinerary is highly recommended for travelers seeking a budget-conscious, immersive Armenian nature and culture experience distinct from typical routes. It balances scenic hiking, tranquil lakes, authentic"
+    },
+    "final_answer": "**1. Trip Overview**  \nThis 5-day budget-friendly itinerary to Armenia offers a rich blend of immersive nature experiences and authentic local culture. Focusing on mountains, lakes, forests, hiking trails, and vibrant cultural markets — while avoiding museums — it utilizes affordable accommodations and local transport to keep costs under $900. Delight in traditional Armenian cuisine and explore scenic destinations distinct from the commonly visited Dilijan, Tatev, Lake Sevan, and Yerevan highlights of typical itineraries.\n\n**2. Destination Summary**  \nArmenia’s diverse landscapes provide an exceptional playground for nature lovers seeking mountains, serene lakesides, and lush forests. The itinerary emphasizes cultural immersion through local markets and eateries rather than formal museum visits, allowing travelers to engage directly with Armenian traditions. Efficient and economical marshrutkas (shared minibuses) are used throughout, offering authentic transport experiences while keeping the budget low.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival in Yerevan – Local Culture and Vernissage Market**  \n  *Morning:* Arrive in Yerevan and settle into a budget hotel (~$20/night).  \n  *Afternoon:* Visit Vernissage Market, an open-air bazaar with traditional Armenian crafts and artwork—a perfect introduction to authentic local culture (free).  \n  *Evening:* Enjoy dinner at a local spot featuring khorovats (barbecue), dolma, and lavash bread (~$10).\n\n- **Day 2: Day Trip to Dilijan National Park – Forest Hiking and Mountain Views**  \n  *Morning:* Take a marshrutka to Dilijan (~$4-$5, approx. 2 hours).  \n  *Midday:* Hike in the lush Dilijan National Park, nicknamed \"Armenian Switzerland\" (entrance ~$5).  \n  *Afternoon:* Picnic or eat at a local café with traditional dishes (~$10).  \n  *Evening:* Return to Yerevan for rest.\n\n- **Day 3: Exploration of Lake Parz and Nearby Forests (Alternative to Lake Sevan)**  \n  *Morning:* Travel by marshrutka to Lake Parz near Dilijan (~$3-$4, 1.5 hours).  \n  *Daytime:* Explore the forested area surrounding Lake Parz with a gentle hike and enjoy lakeside tranquility, distinct from larger tourist hubs.  \n  *Afternoon:* Sample local fish and regional cuisine at small eateries (~$10).  \n  *Evening:* Return to Yerevan for overnight.\n\n- **Day 4: Mount Aragat Foothills and Local Village Market Experience**  \n  *Morning:* Take a marshrutka to the foothills of Mount Aragat (~$5-$7, about 2 hours).  \n  *Daytime:* Hike scenic trails at the base of Mount Aragat, featuring alpine meadows and panoramic mountain views.  \n  *Afternoon:* Visit a nearby village market to engage with locals and find fresh produce, handmade goods, and traditional snacks (~free to browse; food ~$10).  \n  *Evening:* Return to Yerevan.\n\n- **Day 5: Leisure Day in Yerevan – Parks, Cafes, and Traditional Cuisine**  \n  *Morning:* Leisurely stroll or easy hike through Yerevan’s Circular Park or Lovers’ Park, enjoying natural scenery in the city.  \n  *Afternoon:* Visit smaller neighborhood markets or cafes to further explore local culture and crafts.  \n  *Evening:* Final dinner featuring traditional Armenian dishes (~$10) before departure.\n\n**4. Budget Summary**\n\n| Category          | Cost Estimate (USD) | Notes                        |  \n|-------------------|---------------------|------------------------------|  \n| Accommodation     | $100 (5 nights × $20) | Budget hotels or guesthouses |  \n| Food              | $50 (5 days × $10)    | Traditional local cuisine    |  \n| Transport         | $30-$35               | Marshrutkas between destinations |  \n| Activities/Entrances | $18                   | Park entrances and hikes     |  \n| **Total Estimated Cost** | **~$198-$203**         | Well within $900 budget      |  \n\nRemaining budget (~$697) allows flexibility for souvenirs, additional guided tours, or unforeseen expenses.\n\n**5. Travel Tips**  \n- Use marshrutkas extensively as affordable, authentic local transport. Expect moderate travel times (~1.5–2 hours between key stops).  \n- Carry cash for small purchases at markets and rural areas, since card acceptance can be limited.  \n- Sample traditional dishes such as khorovats, dolma, and lavash at local eateries for authentic flavors and economic meals.  \n- Pack basic hiking gear and weather-appropriate clothing due to outdoor-focused activities.  \n- Consider contingency plans for rainy or inclement weather, like visiting indoor cafes or small artisan workshops in Yerevan as alternative activities.  \n- Engage with local vendors and villagers at markets to deepen cultural immersion beyond sightseeing.\n\n**6. Critic Evaluation Summary**  \nThis itinerary is highly rated for completeness, practicality, and excellent budget fit while being entirely faithful to user interests in nature, local culture, and affordability. Its main strengths include:  \n- Thorough alignment with user preferences for mountains, lakes, forests, hiking, markets, and cuisine;  \n- Extensive use of budget-friendly marshrutka transport;  \n- Balanced, immersive daily activities;  \n- Detailed yet flexible budgeting enabling extra spending options;  \n- Affordable accommodation and authentic food choices.  \n\nAreas for improvement include adding flexible indoor alternatives for bad weather, more explicit travel time guidance, and additional local-guided experiences to enrich cultural engagement.\n\n**7. Final Recommendation**  \nThis carefully curated itinerary is highly recommended for travelers seeking a budget-conscious, immersive Armenian nature and culture experience distinct from typical routes. It balances scenic hiking, tranquil lakes, authentic"
+}

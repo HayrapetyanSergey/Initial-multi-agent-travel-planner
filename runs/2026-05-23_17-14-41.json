@@ -1,0 +1,115 @@
+{
+    "timestamp": "2026-05-23_17-14-41",
+    "user_input": "I want a 5-day trip to Armenia under $900 focused on history, local food, nature, and cultural experiences.",
+    "agent_prompts": {
+        "input_parser_prompt": "You are an AI Travel Input Parser.\n\nYour task is to extract structured travel information from the user's request.\n\nExtract:\n- destination\n- duration_days\n- budget\n- interests\n- travel_style\n\nBudget rule:\n- If the user gives a numeric budget, return it as a number.\n- If the user says cheap, budget-friendly, affordable, luxury, expensive, or similar words without a number, set budget to null.\n- Do not return words like \"cheap\" as budget.\n- Put those words under travel_style instead.\n\nReturn ONLY valid JSON.\n\nIf information is missing, set value to null.",
+        "researcher_prompt": "You are an AI Travel Research Agent.\n\nYour task is to generate structured travel research for any destination in the world.\n\nReturn ONLY valid JSON with this exact structure:\n\n{\n  \"status\": \"success\",\n  \"source\": \"ai_generated_research\",\n  \"destination\": \"...\",\n  \"currency\": \"USD estimates\",\n  \"daily_cost_estimates\": {\n    \"hotel\": 0,\n    \"food\": 0,\n    \"transport\": 0\n  },\n  \"matched_places\": [\n    {\n      \"city\": \"...\",\n      \"name\": \"...\",\n      \"category\": \"...\",\n      \"estimated_cost\": 0,\n      \"description\": \"...\"\n    }\n  ],\n  \"travel_tips\": [\n    \"...\",\n    \"...\",\n    \"...\"\n  ]\n}\n\nRules:\n- Use the user's destination, duration, budget, travel style, and interests.\n- Suggest realistic and popular places.\n- Include at least 4 matched places.\n- Keep all prices approximate in USD.\n- All cost fields must be numbers, not text.\n- Do not include markdown.\n- Do not include explanations outside JSON.\n- Do not include itinerary text.\n- Do not include headings.",
+        "itinerary_prompt": "You are an AI Itinerary Planning Agent.\n\nYour task is to create a realistic day-by-day travel itinerary.\n\nRules:\n- Use only the places and information provided in the research data.\n- Match the user's interests.\n- Do not overload the days.\n- Group nearby or same-city activities together.\n- Include morning, afternoon, and evening for each day.\n- Do not create a full budget breakdown.\n- If there is not enough research data, say what is missing.\n- Return a clear structured itinerary.",
+        "budget_prompt": "You are an AI Budget Estimation Agent.\n\nYour task is to estimate travel costs using available travel data.\n\nEstimate:\n- hotel costs\n- food costs\n- transportation costs\n- activity costs\n- total estimated cost\n\nDetermine whether the plan fits the user's budget.",
+        "critic_prompt": "You are a strict AI Travel Plan Critic Agent.\n\nYour task is to evaluate the travel plan created by other agents.\n\nEvaluate:\n- completeness\n- practicality\n- budget_fit\n- faithfulness\n\nGive scores from 1 to 5.\n\nAlso provide:\n- main strengths\n- weak points\n- improvement suggestions\n- final recommendation\n\nReturn ONLY valid JSON.",
+        "final_response_prompt": "You are an AI Final Response Generator.\n\nYour task is to combine all agent outputs into one clean, professional, structured travel recommendation.\n\nStructure:\n1. Trip Overview\n2. Destination Summary\n3. Day-by-Day Itinerary\n4. Budget Summary\n5. Travel Tips\n6. Critic Evaluation Summary\n7. Final Recommendation\n\nKeep the answer organized and easy to read."
+    },
+    "agent_outputs": {
+        "input_parser_agent": {
+            "destination": "Armenia",
+            "duration_days": 5,
+            "budget": 900,
+            "interests": [
+                "history",
+                "local food",
+                "nature",
+                "cultural experiences"
+            ],
+            "travel_style": null
+        },
+        "research_agent": {
+            "status": "success",
+            "source": "ai_generated_research",
+            "destination": "Armenia",
+            "currency": "USD estimates",
+            "daily_cost_estimates": {
+                "hotel": 40,
+                "food": 15,
+                "transport": 10
+            },
+            "matched_places": [
+                {
+                    "city": "Yerevan",
+                    "name": "History Museum of Armenia",
+                    "category": "history",
+                    "estimated_cost": 3,
+                    "description": "Explore Armenia's rich history through extensive artifacts and exhibits covering the nation's ancient to modern past."
+                },
+                {
+                    "city": "Yerevan",
+                    "name": "Vernissage Market",
+                    "category": "cultural experiences",
+                    "estimated_cost": 0,
+                    "description": "An open-air market offering unique Armenian crafts, souvenirs, and local art, providing an immersive cultural shopping experience."
+                },
+                {
+                    "city": "Geghard",
+                    "name": "Geghard Monastery",
+                    "category": "history",
+                    "estimated_cost": 5,
+                    "description": "A UNESCO World Heritage site carved into the rock, surrounded by stunning cliffs, showcasing medieval Armenian religious architecture."
+                },
+                {
+                    "city": "Sevan",
+                    "name": "Lake Sevan",
+                    "category": "nature",
+                    "estimated_cost": 0,
+                    "description": "One of the largest freshwater high-altitude lakes in the world, perfect for nature walks, swimming, and sampling fresh local fish dishes."
+                }
+            ],
+            "travel_tips": [
+                "Try traditional Armenian dishes like khorovats (barbecue) and dolma at local eateries for an authentic culinary experience.",
+                "Use public minibuses (marshrutkas) for affordable and convenient transportation between cities and major attractions.",
+                "Carry some cash in Armenian dram for small purchases and markets where cards may not be accepted."
+            ]
+        },
+        "itinerary_agent": "Armenia 5-Day Itinerary: History, Local Food, Nature & Cultural Experiences\n\nDay 1: Arrival and Yerevan Exploration\n- Morning: Arrive in Yerevan, check into hotel (~$40/night)\n- Afternoon: Visit the History Museum of Armenia ($3) to dive into the nation's rich history and artifacts\n- Evening: Dinner at a local eatery, trying traditional dishes like khorovats and dolma (~$15)\n- Optional: Evening stroll and exploring city squares\n\nDay 2: Cultural Immersion in Yerevan\n- Morning: Explore Vernissage Market (free) – browse Armenian crafts, souvenirs, and local art; perfect cultural shopping experience\n- Afternoon: Enjoy lunch at a nearby café with local Armenian cuisine (~$15)\n- Evening: Attend a local cultural event or enjoy Armenian music in a traditional venue (budget permitting)\n\nDay 3: Nature and History – Geghard and Surroundings\n- Morning: Travel to Geghard (~1-hour drive via marshrutka; estimated transport $10)\n- Visit Geghard Monastery ($5), a UNESCO World Heritage Site carved into cliffs\n- Afternoon: Explore the surrounding nature; scenic walks around the monastery area\n- Evening: Return to Yerevan, dinner featuring local fish or other traditional dishes (~$15)\n\nDay 4: Lake Sevan Natural Beauty and Cuisine\n- Morning: Travel to Lake Sevan (~1.5-hour trip; marshrutka transport $10)\n- Enjoy nature walks, swimming, and relax by one of the largest high-altitude freshwater lakes in the world (free)\n- Afternoon: Sample fresh fish dishes at lakeside restaurants (~$15)\n- Evening: Return to Yerevan, light dinner or relaxed evening\n\nDay 5: Leisure and Departure\n- Morning: Free time for last-minute shopping or visiting any preferred spots in Yerevan\n- Lunch: Enjoy a final Armenian meal (~$15)\n- Afternoon: Prepare for departure, transfer to airport (transport $10 estimated)\n- Evening: Departure from Armenia\n\nBudget Considerations:\n- Accommodation: 5 nights x $40 = $200\n- Food: 5 days x $15 = $75\n- Transport: Approx. $40 for intercity travel and local transport\n- Entrance fees: History Museum ($3) + Geghard ($5) = $8\n- Miscellaneous/Shopping: Remaining budget\n\nTravel Tips:\n- Use marshrutkas for affordable travel between cities\n- Carry cash in Armenian dram for markets and small vendors\n- Try authentic dishes at local eateries for an immersive culinary experience\n\nThis itinerary balances history, nature, local food, and cultural experiences without overloading each day, making your 5-day Armenia trip enriching and enjoyable!",
+        "budget_agent": {
+            "duration_days": 5,
+            "user_budget": 900.0,
+            "estimated_costs": {
+                "hotel_total": 200,
+                "food_total": 75,
+                "transport_total": 50,
+                "activities_total": 8,
+                "total_estimated_cost": 333
+            },
+            "remaining_budget": 567.0,
+            "budget_status": "Within budget",
+            "note": "Costs are approximate and based on the local knowledge base, not live prices."
+        },
+        "critic_agent": {
+            "completeness": 5,
+            "practicality": 5,
+            "budget_fit": 5,
+            "faithfulness": 5,
+            "main_strengths": [
+                "Thorough coverage of interests including history, nature, local food, and cultural experiences.",
+                "Well-structured daily itinerary with balanced activities and rest.",
+                "Realistic cost estimations that fit well within the user's budget.",
+                "Practical travel tips enhancing local affordability and experience.",
+                "Multiple modes of transport and dining options considered."
+            ],
+            "weak_points": [
+                "Evening activities on Day 2 mention attending a cultural event 'budget permitting' but could be more specific about cost or alternative options.",
+                "No explicit mention of contingency plans or alternative activities in case of weather changes or other disruptions.",
+                "Limited detail on accommodation options beyond a flat nightly rate which might vary in quality or location."
+            ],
+            "improvement_suggestions": [
+                "Provide estimated costs or examples for evening cultural events on Day 2 to help planning.",
+                "Include brief suggestions for alternative indoor activities if weather or timing is unfavorable.",
+                "Add recommendations or links for accommodation types or neighborhoods within Yerevan for better clarity.",
+                "Mention any visa, health, or safety considerations for travelers to Armenia.",
+                "Suggest booking transport and accommodations in advance to secure best prices."
+            ],
+            "final_recommendation": "Approved with minor enhancements recommended. The plan is comprehensive, budget-conscious, and well aligned with the user's interests and time frame, ensuring a practical and fulfilling trip to Armenia."
+        },
+        "final_response_agent": "**1. Trip Overview**  \nEmbark on a culturally rich and nature-filled 5-day journey to Armenia, designed to immerse you in the country’s profound history, delicious local cuisine, breathtaking natural scenery, and vibrant cultural experiences—all carefully planned within a $900 budget.\n\n**2. Destination Summary**  \nArmenia offers a unique blend of ancient heritage and natural beauty. Its capital, Yerevan, features museums and markets that celebrate Armenian history and crafts, while nearby sites like Geghard Monastery reveal stunning medieval architecture amidst scenic cliffs. Lake Sevan provides a serene escape with opportunities for relaxation and local culinary delights. The country is known for welcoming hospitality, traditional dishes such as khorovats (barbecue) and dolma, and affordable travel logistics.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival and Yerevan Exploration**  \n  - Morning: Arrive in Yerevan and settle into your hotel (~$40/night).  \n  - Afternoon: Visit the History Museum of Armenia ($3) to explore artifacts that narrate Armenia’s extensive past.  \n  - Evening: Dine at a local restaurant sampling khorovats and dolma (~$15). Enjoy a leisurely stroll around city squares.  \n\n- **Day 2: Cultural Immersion in Yerevan**  \n  - Morning: Browse the Vernissage Market (free), an open-air bazaar showcasing Armenian crafts and art—ideal for cultural engagement and souvenir shopping.  \n  - Afternoon: Lunch at a nearby café featuring authentic Armenian cuisine (~$15).  \n  - Evening: Consider attending a local cultural event or traditional music performance. While costs vary, typical entry fees range from $5-$15. Alternatively, enjoy live Armenian music in venues with no cover charges.  \n\n- **Day 3: Nature and History – Geghard Monastery**  \n  - Morning: Take a marshrutka (~$10) for approximately an hour to Geghard.  \n  - Visit Geghard Monastery ($5), a UNESCO World Heritage site intricately carved into rock and enveloped by dramatic cliffs.  \n  - Afternoon: Explore surrounding nature with scenic walks.  \n  - Evening: Return to Yerevan and have dinner (~$15) featuring local specialties, possibly fresh fish dishes.  \n\n- **Day 4: Lake Sevan Natural Beauty and Local Cuisine**  \n  - Morning: Travel by marshrutka (~$10) to Lake Sevan (1.5-hour trip).  \n  - Spend the day enjoying nature walks, swimming, or simply relaxing by one of the world’s largest high-altitude freshwater lakes (free).  \n  - Sample lakeside fresh fish dishes (~$15).  \n  - Evening: Return to Yerevan for a light dinner or relaxing evening.  \n\n- **Day 5: Leisure and Departure**  \n  - Morning: Free time for last-minute shopping or visiting additional Yerevan sites.  \n  - Lunch: Enjoy a final Armenian meal (~$15).  \n  - Afternoon: Transfer to the airport by marshrutka (~$10).  \n  - Evening: Departure.  \n\n**4. Budget Summary**  \n| Expense                 | Estimated Cost (USD)  |  \n|-------------------------|----------------------|  \n| Accommodation (5 nights)| $200                 |  \n| Food (5 days)           | $75                  |  \n| Transport (local & intercity)| $50             |  \n| Entrance Fees (museum & monastery) | $8           |  \n| Miscellaneous/Shopping  | Remaining $567         |  \n\n*Total Estimated Cost:* Approximately $333, keeping you well within your $900 budget, allowing flexibility for additional activities, souvenirs, or upgraded dining options.\n\n**5. Travel Tips**  \n- Use the affordable and efficient marshrutkas for intercity and local travel.  \n- Carry some Armenian dram in cash for markets, small vendors, and transportation, as cards may not always be accepted.  \n- Try traditional dishes like khorovats and dolma at local eateries for authentic flavors.  \n- Consider booking accommodation and transport in advance to secure the best rates.  \n- If weather or timing disrupt plans, indoor alternatives in Yerevan include additional museums or cafes with cultural ambiance.  \n- Check visa requirements and health guidelines before travel to ensure smooth entry and safety.  \n\n**6. Critic Evaluation Summary**  \nThe itinerary scores highly for completeness, practicality, budget adherence, and alignment with the user’s interests. Strengths include a well-balanced day-to-day plan combining history, nature, local food, and culture; realistic cost estimates; and practical travel tips enhancing affordability and experience. Suggestions for improvement are to specify evening cultural event costs on Day 2, recommend contingency plans for unpredictable circumstances, and provide more detailed accommodation options within Yerevan. Inclusion of visa, health, and safety advice would further benefit travelers.\n\n**7. Final Recommendation**  \nApproved with minor enhancements suggested. This thoughtfully crafted 5-day Armenia itinerary offers a rewarding exploration of the country’s historical sites, natural wonders, traditional cuisine, and cultural soul—all comfortably within budget. With its blend of engaging activities and practical travel advice, it promises an authentic and memorable Armenian adventure."
+    },
+    "final_answer": "**1. Trip Overview**  \nEmbark on a culturally rich and nature-filled 5-day journey to Armenia, designed to immerse you in the country’s profound history, delicious local cuisine, breathtaking natural scenery, and vibrant cultural experiences—all carefully planned within a $900 budget.\n\n**2. Destination Summary**  \nArmenia offers a unique blend of ancient heritage and natural beauty. Its capital, Yerevan, features museums and markets that celebrate Armenian history and crafts, while nearby sites like Geghard Monastery reveal stunning medieval architecture amidst scenic cliffs. Lake Sevan provides a serene escape with opportunities for relaxation and local culinary delights. The country is known for welcoming hospitality, traditional dishes such as khorovats (barbecue) and dolma, and affordable travel logistics.\n\n**3. Day-by-Day Itinerary**\n\n- **Day 1: Arrival and Yerevan Exploration**  \n  - Morning: Arrive in Yerevan and settle into your hotel (~$40/night).  \n  - Afternoon: Visit the History Museum of Armenia ($3) to explore artifacts that narrate Armenia’s extensive past.  \n  - Evening: Dine at a local restaurant sampling khorovats and dolma (~$15). Enjoy a leisurely stroll around city squares.  \n\n- **Day 2: Cultural Immersion in Yerevan**  \n  - Morning: Browse the Vernissage Market (free), an open-air bazaar showcasing Armenian crafts and art—ideal for cultural engagement and souvenir shopping.  \n  - Afternoon: Lunch at a nearby café featuring authentic Armenian cuisine (~$15).  \n  - Evening: Consider attending a local cultural event or traditional music performance. While costs vary, typical entry fees range from $5-$15. Alternatively, enjoy live Armenian music in venues with no cover charges.  \n\n- **Day 3: Nature and History – Geghard Monastery**  \n  - Morning: Take a marshrutka (~$10) for approximately an hour to Geghard.  \n  - Visit Geghard Monastery ($5), a UNESCO World Heritage site intricately carved into rock and enveloped by dramatic cliffs.  \n  - Afternoon: Explore surrounding nature with scenic walks.  \n  - Evening: Return to Yerevan and have dinner (~$15) featuring local specialties, possibly fresh fish dishes.  \n\n- **Day 4: Lake Sevan Natural Beauty and Local Cuisine**  \n  - Morning: Travel by marshrutka (~$10) to Lake Sevan (1.5-hour trip).  \n  - Spend the day enjoying nature walks, swimming, or simply relaxing by one of the world’s largest high-altitude freshwater lakes (free).  \n  - Sample lakeside fresh fish dishes (~$15).  \n  - Evening: Return to Yerevan for a light dinner or relaxing evening.  \n\n- **Day 5: Leisure and Departure**  \n  - Morning: Free time for last-minute shopping or visiting additional Yerevan sites.  \n  - Lunch: Enjoy a final Armenian meal (~$15).  \n  - Afternoon: Transfer to the airport by marshrutka (~$10).  \n  - Evening: Departure.  \n\n**4. Budget Summary**  \n| Expense                 | Estimated Cost (USD)  |  \n|-------------------------|----------------------|  \n| Accommodation (5 nights)| $200                 |  \n| Food (5 days)           | $75                  |  \n| Transport (local & intercity)| $50             |  \n| Entrance Fees (museum & monastery) | $8           |  \n| Miscellaneous/Shopping  | Remaining $567         |  \n\n*Total Estimated Cost:* Approximately $333, keeping you well within your $900 budget, allowing flexibility for additional activities, souvenirs, or upgraded dining options.\n\n**5. Travel Tips**  \n- Use the affordable and efficient marshrutkas for intercity and local travel.  \n- Carry some Armenian dram in cash for markets, small vendors, and transportation, as cards may not always be accepted.  \n- Try traditional dishes like khorovats and dolma at local eateries for authentic flavors.  \n- Consider booking accommodation and transport in advance to secure the best rates.  \n- If weather or timing disrupt plans, indoor alternatives in Yerevan include additional museums or cafes with cultural ambiance.  \n- Check visa requirements and health guidelines before travel to ensure smooth entry and safety.  \n\n**6. Critic Evaluation Summary**  \nThe itinerary scores highly for completeness, practicality, budget adherence, and alignment with the user’s interests. Strengths include a well-balanced day-to-day plan combining history, nature, local food, and culture; realistic cost estimates; and practical travel tips enhancing affordability and experience. Suggestions for improvement are to specify evening cultural event costs on Day 2, recommend contingency plans for unpredictable circumstances, and provide more detailed accommodation options within Yerevan. Inclusion of visa, health, and safety advice would further benefit travelers.\n\n**7. Final Recommendation**  \nApproved with minor enhancements suggested. This thoughtfully crafted 5-day Armenia itinerary offers a rewarding exploration of the country’s historical sites, natural wonders, traditional cuisine, and cultural soul—all comfortably within budget. With its blend of engaging activities and practical travel advice, it promises an authentic and memorable Armenian adventure."
+}

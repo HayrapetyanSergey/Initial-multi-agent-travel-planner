@@ -1,0 +1,90 @@
+{
+  "Japan": {
+    "currency": "USD estimates",
+    "average_daily_hotel": 90,
+    "average_daily_food": 45,
+    "average_daily_transport": 18,
+    "cities": {
+      "Tokyo": {
+        "best_for": ["anime", "technology", "food", "shopping"],
+        "attractions": [
+          {
+            "name": "Akihabara",
+            "category": "anime and technology",
+            "estimated_cost": 0,
+            "description": "A major district for anime, manga, gaming, electronics, and tech culture."
+          },
+          {
+            "name": "Shibuya Crossing",
+            "category": "city experience",
+            "estimated_cost": 0,
+            "description": "One of Tokyo's most famous urban landmarks."
+          },
+          {
+            "name": "teamLab Planets",
+            "category": "technology and digital art",
+            "estimated_cost": 25,
+            "description": "Immersive digital art museum using lights, projections, and interactive installations."
+          },
+          {
+            "name": "Ghibli Museum",
+            "category": "anime and culture",
+            "estimated_cost": 10,
+            "description": "Museum dedicated to Studio Ghibli animation and creative storytelling."
+          },
+          {
+            "name": "Tsukiji Outer Market",
+            "category": "food",
+            "estimated_cost": 25,
+            "description": "Popular food market with sushi, seafood, snacks, and street food."
+          }
+        ]
+      },
+      "Kyoto": {
+        "best_for": ["culture", "temples", "food"],
+        "attractions": [
+          {
+            "name": "Fushimi Inari Shrine",
+            "category": "culture",
+            "estimated_cost": 0,
+            "description": "Famous shrine known for thousands of red torii gates."
+          },
+          {
+            "name": "Arashiyama Bamboo Forest",
+            "category": "nature and culture",
+            "estimated_cost": 0,
+            "description": "Scenic bamboo grove and one of Kyoto's most visited places."
+          },
+          {
+            "name": "Nishiki Market",
+            "category": "food",
+            "estimated_cost": 25,
+            "description": "Traditional market known for Kyoto snacks and local food."
+          }
+        ]
+      },
+      "Osaka": {
+        "best_for": ["food", "nightlife", "entertainment"],
+        "attractions": [
+          {
+            "name": "Dotonbori",
+            "category": "food and nightlife",
+            "estimated_cost": 30,
+            "description": "Famous area for street food, neon lights, and entertainment."
+          },
+          {
+            "name": "Universal Studios Japan",
+            "category": "entertainment",
+            "estimated_cost": 80,
+            "description": "Large theme park with rides, shows, and pop-culture attractions."
+          }
+        ]
+      }
+    },
+    "travel_tips": [
+      "Use public transport inside major cities.",
+      "Reserve popular museums and themed attractions in advance.",
+      "For a 7-day trip, Tokyo + Kyoto or Tokyo + Osaka is more realistic than visiting too many cities."
+    ]
+  }
+}
